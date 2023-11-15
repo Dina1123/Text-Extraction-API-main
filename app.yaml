@@ -1,0 +1,30 @@
+runtime: python38
+env: flex
+api_version: 1
+
+manual_scaling:
+  instances: 1
+
+beta_settings:
+  cloud_sql_instances: willwork-402711:us-central1:text-extraction-db
+
+include: credentials.yaml
+
+runtime_config:
+  document_root: .
+
+handlers:
+- url: /(.+\.png)
+  static_files: \1
+  upload: .+\.png
+
+- url: /(.+\.jpg)
+  static_files: \1
+  upload: .+\.jpg
+
+- url: /(.+\.PNG)
+  static_files: \1
+  upload: .+\.PNG
+
+- url: /.*
+  script: auto
